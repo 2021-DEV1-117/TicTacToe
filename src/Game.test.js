@@ -211,5 +211,25 @@ describe ('Game', () => {
 
     });
 
+    it('If a player fill the second diagonal, the game is done and a win message appear', () => {
+        // CASE IF X fills the column
+        let wrapper = shallow(<Game />);
+        let moves = [2,3,4,1,6,0];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(0).text()).toEqual('');
+        checkVictory(wrapper, 'X');
+
+        // CASE IF O fills the column
+
+        wrapper = shallow(<Game />);
+        moves = [0,2,3,4,1,6,5];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(5).text()).toEqual('');
+        checkVictory(wrapper, 'O');
+
+    });
+
 
 });
