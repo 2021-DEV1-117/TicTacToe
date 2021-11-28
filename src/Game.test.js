@@ -131,6 +131,26 @@ describe ('Game', () => {
 
     });
 
+    it('If a player fill the first column, the game is done and a win message appear', () => {
+        // CASE IF X fills the column
+        let wrapper = shallow(<Game />);
+        let moves = [0,1,3,2,6,8];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(8).text()).toEqual('');
+        checkVictory(wrapper, 'X');
+
+        // CASE IF O fills the column
+
+        wrapper = shallow(<Game />);
+        moves = [8,0,1,3,2,6,7];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(7).text()).toEqual('');
+        checkVictory(wrapper, 'O');
+
+    });
+
 
 
 });
