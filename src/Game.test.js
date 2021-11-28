@@ -111,6 +111,26 @@ describe ('Game', () => {
 
     });
 
+    it('If a player fill the third row, the game is done and a win message appear', () => {
+        // CASE IF X fills the row
+        let wrapper = shallow(<Game />);
+        let moves = [6,0,7,1,8,2];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(2).text()).toEqual('');
+        checkVictory(wrapper, 'X');
+
+        // CASE IF O fills the row
+
+        wrapper = shallow(<Game />);
+        moves = [2,6,0,7,4,8,3];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(3).text()).toEqual('');
+        checkVictory(wrapper, 'O');
+
+    });
+
 
 
 });
