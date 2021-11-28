@@ -231,5 +231,14 @@ describe ('Game', () => {
 
     });
 
+    it('If all 9 cases are filled and no one won, a draw message appear', () => {
+        let wrapper = shallow(<Game />);
+        let moves = [0,1,2,3,4,8,7,6,5];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('div.message').first().text()).toEqual('Draw game');
+
+    });
+
 
 });

@@ -49,6 +49,17 @@ const Game = ({ onCellClick }) => {
 
     };
 
+    const isDraw = () => {
+        let gameFull = true;
+        positions.forEach((pos) => {
+            if (pos === -1) {
+                gameFull = false;
+            }
+        });
+
+        return gameFull && winner === -1;
+    };
+
     return <div className="Game">
 
         <table className="board">
@@ -72,6 +83,7 @@ const Game = ({ onCellClick }) => {
         </table>
         <div className="message">
             {winner === 0 ? 'O won the game' : winner === 1 ? 'X won the game' : ''}
+            {isDraw() ? 'Draw game' : ''}
         </div>
     </div>;
 }
