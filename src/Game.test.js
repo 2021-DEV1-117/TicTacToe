@@ -59,4 +59,35 @@ describe ('Game', () => {
         }
     });
 
+    it('If a player fill the first row, the game is done and a win message appear', () => {
+        // CASE IF X fills the row
+
+        let wrapper = shallow(<Game />);
+        wrapper.find('td').at(0).simulate('click'); // X  WIN
+        wrapper.find('td').at(3).simulate('click');
+        wrapper.find('td').at(1).simulate('click'); // X  WIN
+        wrapper.find('td').at(4).simulate('click');
+        wrapper.find('td').at(2).simulate('click'); // X  WIN
+
+        wrapper.find('td').at(8).simulate('click');
+        expect(wrapper.find('td').at(8).text()).toEqual('');
+        expect(wrapper.find('div.message').first().text()).toEqual('X won the game');
+
+        // CASE IF O fills the row
+
+        wrapper = shallow(<Game />);
+
+        wrapper.find('td').at(3).simulate('click');
+        wrapper.find('td').at(0).simulate('click'); // O WIN
+        wrapper.find('td').at(4).simulate('click');
+        wrapper.find('td').at(1).simulate('click'); // O WIN
+        wrapper.find('td').at(8).simulate('click');
+        wrapper.find('td').at(2).simulate('click'); // O  WIN
+
+        wrapper.find('td').at(7).simulate('click');
+        expect(wrapper.find('td').at(7).text()).toEqual('');
+        expect(wrapper.find('div.message').first().text()).toEqual('O won the game');
+
+    });
+
 });

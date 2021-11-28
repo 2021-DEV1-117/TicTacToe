@@ -6,9 +6,10 @@ const Game = ({ onCellClick }) => {
 
     const [positions, setPositions] = useState([-1,-1,-1,-1,-1,-1,-1,-1,-1]);
     const [history, setHistory] = useState([]);
+    const [winner, setWinner] = useState(-1);
 
     const onClick = (position) => {
-        if (positions[position] === -1) {
+        if (positions[position] === -1 && winner === -1) {
 
             let nextMove = 1;
             if (history.length > 0) {
@@ -18,8 +19,27 @@ const Game = ({ onCellClick }) => {
             let updatedPositions = [...positions];
             updatedPositions[position] = nextMove;
             setPositions(updatedPositions);
+            checkVictory(updatedPositions);
+
         }
         if (typeof onCellClick === 'function') onCellClick();
+    };
+
+    const checkVictory = (positions) => {
+        const victoryPositions = [
+            [0,1,2],
+        ];
+        let victory = -1;
+
+        victoryPositions.forEach((victoryCheck) => {
+            if (positions[victoryCheck[0]] !== -1) {
+                if (positions[victoryCheck[0]] === positions[victoryCheck[1]] && positions[victoryCheck[1]] === positions[victoryCheck[2]]) {
+                    victory = positions[victoryCheck[0]];
+                }
+            }
+        });
+        setWinner(victory);
+
     };
 
     return <div className="Game">
@@ -44,7 +64,7 @@ const Game = ({ onCellClick }) => {
             </tbody>
         </table>
         <div className="message">
-
+            {winner === 0 ? 'O won the game' : winner === 1 ? 'X won the game' : ''}
         </div>
     </div>;
 }
