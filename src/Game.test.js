@@ -37,7 +37,16 @@ describe ('Game', () => {
         let wrapper = shallow(<Game />);
         wrapper.find('td').first().simulate('click');
         expect(wrapper.find('td').first().text()).toEqual('X');
+    });
 
+    it('The moves should alternate X and O', () => {
+        let wrapper = shallow(<Game />);
+        for(let i = 0; i< 9; i++) {
+            wrapper.find('td').at(i).simulate('click');
+            //Moves should alternate at each click, but can also be empty string as the game could stop before completing all cells !
+            let inArray = ['',i % 2 ? 'O' : 'X'].indexOf(wrapper.find('td').at(i).text()) > -1;
+            expect(inArray).toEqual(true);
+        }
     });
 
 });
