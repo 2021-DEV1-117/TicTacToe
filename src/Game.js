@@ -20,7 +20,9 @@ const Game = () => {
                 <td></td>
             </tr>
         </table>
+        <div className="message">
 
+        </div>
     </div>;
 }
 

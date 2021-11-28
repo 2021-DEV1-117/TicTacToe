@@ -18,4 +18,9 @@ describe ('Game', () => {
         })
     });
 
+    it('Game should render a div containing the result (win,draw)',() => {
+        let wrapper = shallow(<Game />);
+        expect(wrapper.find('div.message').length).toEqual(1);
+    });
+
 });
