@@ -6,7 +6,11 @@ const Game = ({ onCellClick }) => {
 
     const [positions, setPositions] = useState([-1,-1,-1,-1,-1,-1,-1,-1,-1]);
 
-    const onClick = () => {
+    const onClick = (position) => {
+        let updatedPositions = [...positions];
+        updatedPositions[position] = 1;
+        setPositions(updatedPositions);
+
         if (typeof onCellClick === 'function') onCellClick();
     };
 
@@ -20,7 +24,8 @@ const Game = ({ onCellClick }) => {
                         rows.push(
                             <tr key={y}>
                                 {positions.slice(y*3,y*3+3).map((val, x) =>
-                                    <td  onClick={()=> {onClick( x*3+y)}} key={x}>
+                                    <td  onClick={()=> {onClick( y*3+x)}} key={x}>
+                                        { val === 1 ? 'X' : '' }
                                     </td>
                                 )}
                             </tr>

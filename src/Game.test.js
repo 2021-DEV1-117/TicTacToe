@@ -33,4 +33,11 @@ describe ('Game', () => {
         handleClickCheck.mockRestore();
     });
 
+    it('The first move should be a X', () => {
+        let wrapper = shallow(<Game />);
+        wrapper.find('td').first().simulate('click');
+        expect(wrapper.find('td').first().text()).toEqual('X');
+
+    });
+
 });
