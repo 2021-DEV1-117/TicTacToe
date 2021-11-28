@@ -1,11 +1,14 @@
 import React,  { useState }  from 'react';
 import "./Game.css";
 
-const Game = () => {
+const Game = ({ onCellClick }) => {
 
 
     const [positions, setPositions] = useState([-1,-1,-1,-1,-1,-1,-1,-1,-1]);
 
+    const onClick = () => {
+        if (typeof onCellClick === 'function') onCellClick();
+    };
 
     return <div className="Game">
 
@@ -17,7 +20,7 @@ const Game = () => {
                         rows.push(
                             <tr key={y}>
                                 {positions.slice(y*3,y*3+3).map((val, x) =>
-                                    <td key={x}>
+                                    <td  onClick={()=> {onClick( x*3+y)}} key={x}>
                                     </td>
                                 )}
                             </tr>

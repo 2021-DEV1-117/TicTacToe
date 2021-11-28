@@ -23,4 +23,14 @@ describe ('Game', () => {
         expect(wrapper.find('div.message').length).toEqual(1);
     });
 
+    it('a onClick function should be called when a cell is clicked', () => {
+        let listener = { callback : () => {}};
+        const handleClickCheck = jest.spyOn(listener, 'callback');
+        let wrapper = shallow(<Game onCellClick={listener.callback}/>);
+
+        wrapper.find('td').first().simulate('click');
+        expect(handleClickCheck).toHaveBeenCalled()
+        handleClickCheck.mockRestore();
+    });
+
 });
