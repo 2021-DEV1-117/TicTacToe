@@ -66,6 +66,10 @@ describe ('Game', () => {
         });
     };
 
+    const checkVictory = (wrapper, player) => {
+        expect(wrapper.find('div.message').first().text()).toEqual(player+' won the game');
+    };
+
     it('If a player fill the first row, the game is done and a win message appear', () => {
         // CASE IF X fills the row
         let wrapper = shallow(<Game />);
@@ -73,7 +77,7 @@ describe ('Game', () => {
         simulateGame(wrapper,moves);
 
         expect(wrapper.find('td').at(8).text()).toEqual('');
-        expect(wrapper.find('div.message').first().text()).toEqual('X won the game');
+        checkVictory(wrapper, 'X');
 
         // CASE IF O fills the row
 
@@ -83,6 +87,7 @@ describe ('Game', () => {
 
         expect(wrapper.find('td').at(7).text()).toEqual('');
         expect(wrapper.find('div.message').first().text()).toEqual('O won the game');
+        checkVictory(wrapper, 'O');
 
     });
 
@@ -93,7 +98,7 @@ describe ('Game', () => {
         simulateGame(wrapper,moves);
 
         expect(wrapper.find('td').at(8).text()).toEqual('');
-        expect(wrapper.find('div.message').first().text()).toEqual('X won the game');
+        checkVictory(wrapper, 'X');
 
         // CASE IF O fills the row
 
@@ -102,7 +107,7 @@ describe ('Game', () => {
         simulateGame(wrapper,moves);
 
         expect(wrapper.find('td').at(7).text()).toEqual('');
-        expect(wrapper.find('div.message').first().text()).toEqual('O won the game');
+        checkVictory(wrapper, 'O');
 
     });
 
