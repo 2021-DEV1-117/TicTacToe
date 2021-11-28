@@ -171,6 +171,25 @@ describe ('Game', () => {
 
     });
 
+    it('If a player fill the third column, the game is done and a win message appear', () => {
+        // CASE IF X fills the column
+        let wrapper = shallow(<Game />);
+        let moves = [2,0,5,1,8,3];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(3).text()).toEqual('');
+        checkVictory(wrapper, 'X');
+
+        // CASE IF O fills the column
+
+        wrapper = shallow(<Game />);
+        moves = [3,2,0,5,1,8,4];
+        simulateGame(wrapper,moves);
+
+        expect(wrapper.find('td').at(4).text()).toEqual('');
+        checkVictory(wrapper, 'O');
+
+    });
 
 
 });
