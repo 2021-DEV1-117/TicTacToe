@@ -49,4 +49,14 @@ describe ('Game', () => {
         }
     });
 
+    it('All cells should not be played twice', () => {
+        let wrapper = shallow(<Game />);
+        for(let i = 0; i< 9; i++) {
+            wrapper.find('td').at(i).simulate('click');
+            wrapper.find('td').at(i).simulate('click');
+            //Moves should be the same after 2 clicks, even empty string, if the game stop before completing all cells.
+            expect(['',i % 2 ? 'O' : 'X']).toContain(wrapper.find('td').at(i).text());
+        }
+    });
+
 });

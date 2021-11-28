@@ -8,15 +8,17 @@ const Game = ({ onCellClick }) => {
     const [history, setHistory] = useState([]);
 
     const onClick = (position) => {
-        let nextMove = 1;
-        if (history.length > 0) {
-            nextMove = history[history.length - 1] ? 0 : 1;
-        }
-        setHistory([...history,nextMove]);
-        let updatedPositions = [...positions];
-        updatedPositions[position] = nextMove;
-        setPositions(updatedPositions);
+        if (positions[position] === -1) {
 
+            let nextMove = 1;
+            if (history.length > 0) {
+                nextMove = history[history.length - 1] ? 0 : 1;
+            }
+            setHistory([...history, nextMove]);
+            let updatedPositions = [...positions];
+            updatedPositions[position] = nextMove;
+            setPositions(updatedPositions);
+        }
         if (typeof onCellClick === 'function') onCellClick();
     };
 
